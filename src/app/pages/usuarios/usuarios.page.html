@@ -1,0 +1,154 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding" mode="ios" style="--background: var(--ion-content-custom)">
+
+  <ion-item lines="none" style="--background: var(--ion-content-custom)">
+    <ion-icon slot="start" name="person-outline" style="margin-top:0px"></ion-icon>
+      <ion-text color="dark" slot="start">
+        <h1 class="ion-text-capitalize" style="margin-top:7px">Perfil</h1>
+      </ion-text>
+  </ion-item>
+  <!-- Loader -->
+  <ng-container *ngIf="loadingData">
+    <ion-card>
+      <ion-spinner name="crescent" class="ion-margin"></ion-spinner>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loadingData">
+    <!-- Información Básica -->
+    <ion-card style="margin-top: 10px; --background: var(--mi-card-bg);" >
+
+      <ion-card-header>
+        <ion-card-title>Información Básica</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content style="--background: var(--mi-card-bg);">
+        <ion-item lines="none" style="--background: transparent;">
+          <ion-avatar slot="start" class="ion-margin-end" style="height: 110px; width: 110px">
+              <img src="/assets/perfil.jpg">
+          </ion-avatar>
+
+          <ion-label class="ion-text-wrap">
+            <h2>Cambiar Foto Perfil</h2>
+            <p>Medidas recomendadas: 120x120. Tamaño máximo: 5MB</p>
+          </ion-label>
+
+        </ion-item>
+
+        <ion-list>
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Nombre:</ion-label>
+              <ion-input class="input-centrado-gris con-sangria input-visible" [value]="userData.Nombre" disabled></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Apellido Paterno:</ion-label>
+            <ion-input class="input-centrado-gris con-sangria input-visible" [value]="userData.Apellidos" disabled></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Apellido Materno:</ion-label>
+            <ion-input class="input-centrado-gris con-sangria input-visible" value="" disabled></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Email:</ion-label>
+            <ion-input class="input-centrado-gris con-sangria input-visible" [value]="userData.Correo" disabled></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Celular:</ion-label>
+            <ion-input class="input-centrado-gris con-sangria input-visible" [value]="userData.Telefono" disabled></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Departamento:</ion-label>
+            <ion-input class="input-centrado-gris con-sangria input-visible" [value]="userData.Departamento" disabled></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Correos Adicionales -->
+    <ion-card *ngIf="userData?.CorreosAdicionales?.length"  style="--background: var(--mi-card-bg);">
+      <ion-card-header>
+        <ion-card-title>Correos Adicionales</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ng-container *ngFor="let correo of userData.CorreosAdicionales; let i = index">
+          <ion-item lines="none" style="margin-left: -10px; --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input class="input-centrado-gris con-sangria input-visible" [value]="correo.email" disabled></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style="--background: var(--mi-item-bg); margin-left: -10px; display: flex; align-items: center;">
+  
+            <ion-label position="stacked" style="flex: 1 1 100%; margin-bottom: 4px;">
+              Contraseña
+            </ion-label>
+
+            <div style="position: relative; flex: 1 1 auto; display: flex; align-items: center; width: 100%;">
+              <ion-input
+                class="input-centrado-gris con-sangria input-visible"
+                [type]="showPassword[i] ? 'text' : 'password'"
+                [value]="correo.password"
+                disabled
+                style="padding-right: 40px; width: 100%;">
+              </ion-input>
+
+              <ion-icon
+                [name]="showPassword[i] ? 'eye-off-outline' : 'eye-outline'"
+                (click)="mostrarContrasenia(i)"
+                style="position: absolute; right: 12px; cursor: pointer; font-size: 22px; top: 50%; transform: translateY(-50%); color: #333;">
+              </ion-icon>
+            </div>
+  
+          </ion-item>
+
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Cambio de Contraseña -->
+    <ion-card style=" --background: var(--mi-card-bg);">
+      <ion-card-header>
+        <ion-card-title>Cambiar Contraseña</ion-card-title>
+      </ion-card-header>
+      <ion-card-content style=" --background: var(--mi-card-bg);">
+        <ion-list  style=" --background: var(--mi-card-bg);">
+          <ion-item lines="none" style=" --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Contraseña Actual:</ion-label>
+            <ion-input class="input-centradont con-sangria" placeholder="Contraseña actual" type="password" [(ngModel)]="pwd"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style=" --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Contraseña Nueva:</ion-label>
+            <ion-input class="input-centradont con-sangria" placeholder="Contraseña nueva" type="password" [(ngModel)]="npwd"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" style=" --background: var(--mi-item-bg)">
+            <ion-label position="stacked">Confirmar Contraseña:</ion-label>
+            <ion-input class="input-centradont con-sangria" placeholder="Confirmar contraseña" type="password" [(ngModel)]="npwd1"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <ion-button style="margin-top: 20px;" expand="block" color="primary" (click)="cambiarpwd()" [disabled]="savingPassword">
+            Guardar Cambios
+            <ion-spinner name="dots" slot="end" *ngIf="savingPassword"></ion-spinner>
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ion-footer class="ion-padding font-size-14">
+    <div>
+      <ion-text> Copyright © 2021 Fibrax. All rights reserved. </ion-text>
+    </div>
+  </ion-footer>
+  
+</ion-content>
+
+
+

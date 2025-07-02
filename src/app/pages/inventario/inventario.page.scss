@@ -1,0 +1,32 @@
+.segment-chico {
+  // Cambiar altura total
+  --height: 36px;
+
+  // Opcional: reduce el padding interno
+  ion-segment-button {
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 6px;
+    --padding-end: 6px;
+    --indicator-height: 2px;
+    --border-radius: 8px;
+    height: 35px;
+
+    ion-label {
+      font-size: 13px;
+      line-height: 1;
+    }
+  }
+}
+
+.borde-verde {
+  --border-color: #1ced3f;
+  --color: #1ced3f;
+  border-radius: 8px;
+}
+
+.borde-rojo {
+  --border-color: #c91414;
+  --color: #c91414;
+  border-radius: 8px;
+}

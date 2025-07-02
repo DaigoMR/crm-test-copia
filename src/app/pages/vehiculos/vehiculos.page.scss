@@ -1,0 +1,82 @@
+.card-container {
+  position: relative; // Importante para que el botón se posicione sobre esta base
+}
+
+
+.botones-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 80%;
+  margin: 0 auto; // Para centrar los botones horizontalmente
+  margin-bottom: 20px;
+  margin-top: 5px
+}
+
+.carta-vacia {
+  height: 70px;
+  width: 90%;
+  margin: 0 auto; // Para centrarla horizontalmente
+}
+
+.texto-grande {
+  font-size: 16px;
+  font-weight: bold; /* opcional */
+  line-height: 1.5;
+}
+
+.negro {
+  --color: var(--ion-solicitud)
+}
+
+.fondo-modal {
+  background-image: url('/assets/FondoModal.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}
+
+ion-content.fondo-modal {
+  --background: transparent !important;
+}
+
+.input-con-borde {
+  --highlight-color-focused: #145AC9; /* Color del borde cuando está enfocado */
+  --highlight-color: #145AC9;         /* Color del borde por defecto */
+  --border-color: #145AC9;            /* Forzar borde */
+  border: 1px solid #145AC9;
+  border-radius: 8px;
+  padding: 4px;
+  width: 85%;
+}
+
+.input-centrado-yo {
+  margin: 0 auto;
+  width: 90%;
+  border: 1px solid #145AC9;
+  border-radius: 8px;
+  --highlight-color: #145AC9;
+  --highlight-color-focused: #145AC9;
+  margin-left: 12px;
+}
+
+.input-visible {
+  --color: var(--ion-text-color) !important;      // color del texto
+  opacity: 1 !important;         // fuerza que se vea totalmente opaco
+  font-weight: 500;              // opcional: más grueso
+  font-size: 16px;               // ajusta tamaño
+}
+
+.registro-card {
+  margin: 8px 8px;
+  font-size: 14px;
+  --ion-card-background: #f1f3f9;
+  --box-shadow: none;
+  border-radius: 10px;
+}
+
+.espaciado-header {
+  padding-top: calc(env(safe-area-inset-top) + 10px);
+}

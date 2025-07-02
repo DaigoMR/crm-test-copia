@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4"><strong>Folio:</strong></ion-col>
+          <ion-col size="8">{{ item.folio }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>Vehículo:</strong></ion-col>
+          <ion-col size="8">{{ item.vehiculo }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>Estatus:</strong></ion-col>
+          <ion-col size="8">{{ item.estatus }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>Foto del Vehículo:</strong></ion-col>
+          <ion-col size="8">{{ item.foto }}</ion-col>
+        </ion-row>
+        <!-- etc -->
+        <ion-row class="ion-justify-content-center">
+          <ion-button (click)="cerrarModal()" style="height: 20px; width: 120px; margin-bottom: -5px" fill="outline" color="danger" shape="round">
+            Cerrar
+          </ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

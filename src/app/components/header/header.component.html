@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar style="--padding-top: calc(env(safe-area-inset-top) + 35px); --background: var(--ion-toolbar-background-custom);">
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="defaultBackHref"
+        text="Atrás"
+        color="primary">
+
+      </ion-back-button>
+    </ion-buttons>
+
+
+    <div class="logo-center-mejorado">
+      <img [src]="modoOscuro ? 'https://fxinmobilia.com/SolicitudPagos/Assets/FX_logo_gris.svg' : 'assets/FX2.svg'" slot="end" style="width: 40px; height: 40px; margin-right: -12px;" />
+    </div>
+    
+  </ion-toolbar>
+</ion-header>

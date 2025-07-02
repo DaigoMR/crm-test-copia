@@ -1,0 +1,20 @@
+
+
+<ion-content class="ion-padding" style="--background: var(--mi-list-bg)">
+
+  <h2 class="ion-text-center" style="margin-bottom: 14px">Ingresa tu correo electrónico: </h2>
+
+    <ion-item class="input-centrado con-sangria"  lines="none" style="--background: transparent; overflow: hidden; border-radius: 10px; margin: 10px auto; width: 90%; box-shadow: 0 2px 8px rgba(0,0,0,0.1); --background: var(--ion-toolbar-background-custom)">
+      <ion-input placeholder="Correo electrónico" type="email" [formControl]="correoRec"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="correoRec.invalid && correoRec.touched">
+      {{ validarCorreo() }}
+    </ion-text>
+    <ion-button style="margin-top: 15px" expand="block" (click)="enviarCorreo()" [disabled]="isLoading || correoRec.invalid">
+      Recuperar contraseña
+      <ion-spinner *ngIf="isLoading" name="crescent" class="ms-2"></ion-spinner>
+    </ion-button>
+
+    <ion-button color="danger" fill="outline" style="margin-top: 10px" expand="block" (click)="cerrarModal()">Cerrar</ion-button>
+
+</ion-content>

@@ -1,0 +1,41 @@
+.fondo-modal {
+  background-image: url('/assets/FondoModal.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}
+
+ion-content.fondo-modal {
+  --background: transparent !important;
+}
+
+.input-con-borde {
+  --highlight-color-focused: #145AC9; /* Color del borde cuando está enfocado */
+  --highlight-color: #145AC9;         /* Color del borde por defecto */
+  --border-color: #145AC9;            /* Forzar borde */
+  border: 1px solid #145AC9;
+  border-radius: 8px;
+  padding: 4px;
+  width: 85%;
+}
+
+.input-centrado-yo {
+  margin: 0 auto;
+  width: 90%;
+  border: 1px solid #145AC9;
+  border-radius: 8px;
+  --highlight-color: #145AC9;
+  --highlight-color-focused: #145AC9;
+}
+
+.estatus-apartado {
+  color: red;
+  font-weight: bold;
+}
+
+.estatus-disponible {
+  color: green;
+  font-weight: bold;
+}
+

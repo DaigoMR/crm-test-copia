@@ -1,0 +1,55 @@
+:root {
+    --ion-color-light: #f6f8fc;
+	--ion-color-light-rgb: 246,248,252;
+	--ion-color-light-contrast: #000000;
+	--ion-color-light-contrast-rgb: 0,0,0;
+	--ion-color-light-shade: #8d919a;
+	--ion-color-light-tint: #f7f9fc;
+
+    --ion-color-gris: #a9a9a9;
+    --ion-color-gris-rgb: 255,136,0;
+    --ion-color-gris-contrast: #ffffff;
+    --ion-color-gris-contrast-rgb: 255,255,255;
+    --ion-color-gris-shade: #cc6e00;
+    --ion-color-gris-tint: #ffa733;
+
+    --ion-content-custom: #ffffff;
+    --ion-color-custom-item-bg: #e6e7ef; // para modo claro
+    --ion-color-custom-header-bg: #9aa2b9;
+    --ion-color-custom-text: #000;
+    --ion-item-background: #fff;
+    --ion-text-color: #000;
+    --ion-toolbar-background-custom: #f6f6f6; 
+    --mi-item-bg: #ffffff; 
+    --mi-card-bg: #ffffff;
+    --mi-boton-color: #ffffff;
+    --mi-list-bg: #ffffff;
+    --ion-text-login: #1f00d0;
+    --ion-borde-soli: #a7a7a7;
+    --ion-contrasena: #23189d;
+    --ion-solicitud: #1b1b1b;
+    --ion-documentos: #e1dfdf;
+    --ion-boton: #2e67e2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-content-custom: #242424;
+    --ion-color-custom-item-bg: #2a2a2a; // para modo oscuro
+    --ion-color-custom-header-bg: #3b3b3b;
+    --ion-color-custom-text: #fff;
+    --ion-item-background: #1e1e1e;
+    --ion-text-color: #fff;
+    --ion-toolbar-background-custom: #181818;
+    --mi-item-bg: #3c3c3c;  // Un gris suave oscuro, no tan negro
+    --mi-card-bg: #3c3c3c;
+    --mi-boton-color: #2a2a2a;
+    --mi-list-bg: #2a2a2a;
+    --ion-text-login: #ffffff;
+    --ion-borde-soli: #a7a7a7;
+    --ion-contrasena: #c9c7ff;
+    --ion-solicitud: #d7d0d0;
+    --ion-documentos: #383838;
+    --ion-boton: #000000;
+  }
+}

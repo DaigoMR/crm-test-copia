@@ -1,0 +1,16 @@
+.logo-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.separador-container {
+  background: var(--ion-content-custom); /* el fondo claro que necesitas */
+  padding: 5px;
+}
+
+.separador-linea {
+  height: 1px;
+  background-color: #2a2a2a; /* tu línea oscura */
+  margin: 5px 0;
+}

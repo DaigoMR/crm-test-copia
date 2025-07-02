@@ -1,0 +1,13 @@
+.centered-container {
+  display: flex;
+  align-items: center;     /* Centra verticalmente */
+}
+
+.popover-custom {
+  position: absolute;
+  top: 50px; // ajusta según tu layout
+  right: 10px;
+  z-index: 9999;
+  width: 180px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}

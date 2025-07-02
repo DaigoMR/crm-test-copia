@@ -1,0 +1,41 @@
+.input-visible {
+  --color: #000 !important;      // color del texto
+  --background: #ebebeb;
+  opacity: 1 !important;         // fuerza que se vea totalmente opaco
+  font-weight: 500;              // opcional: más grueso
+  font-size: 16px;               // ajusta tamaño
+
+}
+
+.input-centrado-gris {
+  margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
+  align-items: center;
+  border: 1px solid #8b929c;
+  border-radius: 8px;
+  --highlight-color: #8b929c;
+  --highlight-color-focused: #8b929c;
+  padding-left: 12px;
+}
+
+.input-centradont {
+  margin: 0 auto;
+  width: 100%;
+  border: 1px solid #b3b3b3;
+  border-radius: 8px;
+  --highlight-color: #b3b3b3;
+  --highlight-color-focused: #b3b3b3;
+  padding-left: 12px;
+}
+
+ion-item {
+  --border-style: none !important;
+  --border-width: 0 !important;
+  --border-color: transparent !important;
+
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+

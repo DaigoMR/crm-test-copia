@@ -1,0 +1,48 @@
+
+<ion-content class="ion-padding pagina-con-fondo">
+
+  <ion-card style="--background: var(--mi-list-bg); display: flex; align-items: center; justify-content: center;  margin: 80px auto 40px auto; width: 90%; height: 72%; color: #5b65be" class="input-centrado card-login">
+
+    <div class="contenido-centrado contenedor-login">
+    <img src="https://fxinmobilia.com/SolicitudPagos/Assets/FX_logo_gris.svg" class="imagen-centrada" style="width: 80px; height: 80px; margin-top: 10px" />
+ 
+    <div class="ion-text-center" style="color: var(--ion-text-login)">
+      <h1><strong> ¡Hola de nuevo! </strong></h1>
+      <p style="margin-top: 0px"> Bienvenido a Fibrax </p>
+    </div>
+
+    <form name="login" id="login">
+      <ion-item lines="none" class="input-centrado input-con-fondo" style="margin-top: 25px; --background: var(--ion-toolbar-background-custom)">
+        <ion-icon slot="start" name="mail" style="margin-left: -6px"></ion-icon>
+        <ion-input type="text" id="correo" name="correo" [(ngModel)]="loginData.Correo" placeholder="Correo electrónico"
+            required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-centrado input-con-fondo" style="margin-top: 15px; --background: var(--ion-toolbar-background-custom)">    
+        <ion-icon slot="start" name="lock-closed-outline" style="margin-left: -6px"></ion-icon>
+        <ion-input class="con-sangria" style="height: 50px; margin-left: -13px" [type]="verPassword ? 'text' : 'password'" name="password" [(ngModel)]="loginData.Pwd" placeholder="Contraseña" required>
+       </ion-input>
+
+        <ion-icon
+          [name]="verPassword ? 'eye' : 'eye-off'"
+          slot="end"
+          (click)="togglePassword()"
+          style="cursor: pointer;">
+        </ion-icon>
+      </ion-item>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-button (click)="login()" style="width: 90%; margin-top: 15px" expand="block" type="submit">
+          Ingresar
+        </ion-button>
+      </ion-row>
+
+      <div style="margin-top: 10px;" class="ion-text-center" (click)="openDialog()">
+        <ion-label style="color: var(--ion-contrasena)"> ¿Olvidaste tu contraseña? </ion-label>
+      </div>
+    </form>
+    </div>
+  </ion-card>
+  
+</ion-content>

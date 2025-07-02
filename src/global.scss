@@ -1,0 +1,184 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+.fondo-gris {
+  background: var(--ion-color-gris) !important;
+}
+
+.logo-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.logo-center-mejorado {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items:last baseline;
+  width: 50px;   // Ajusta según el tamaño del logo
+  height: 50px;  // Ajusta según el tamaño del logo
+}
+
+.font-size-12 {
+  font-size: 12px !important;
+}
+
+.font-size-14 {
+  font-size: 14px !important;
+}
+
+.font-size-16 {
+  font-size: 16px !important;
+}
+
+.separador {
+  height: 1px;
+  background-color: #b7b4b4;
+  margin: 5px 5px;
+  margin-top: 10px;
+}
+
+.header-center {
+  margin: 0;
+  color: "medium";
+  text-align: center;
+  width: 100%;
+}
+
+.table-header {
+  background-color: #f0f0f0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.nowrap-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.input-centrado {
+  margin: 0 auto;
+  width: 100%;
+  border: 1px solid #145AC9;
+  border-radius: 8px;
+  --highlight-color: #145AC9;
+  --highlight-color-focused: #145AC9;
+}
+
+.imagen-centrada {
+  display: block;
+  margin: 0 auto;
+}
+
+.con-sangria {
+  --padding-start: 12px; /* padding izquierdo */
+}
+
+.pagina-con-fondo {
+  --background: none; /* Evita que el color predeterminado opaque la imagen */
+  background-image: url('/assets/FondoModal.jpg'); /* Ruta relativa */
+  background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.input-con-fondo {
+  border-radius: 10px;
+  margin: 10px auto;
+  width: 90%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+ion-content {
+  --overflow: auto !important;
+  overflow: auto !important;
+  pointer-events: auto !important;
+  touch-action: pan-y !important;
+}
+
+.modal-unificado {
+  --width: 95%;
+  --height: auto;
+  --border-radius: 20px;
+  --max-height: 90vh;
+  --background: #ffffff;
+
+  ion-content {
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+
+  ion-toolbar {
+    --background: #f8f8f8;
+    --color: #222;
+    border-bottom: 1px solid #ddd;
+  }
+
+  ion-item {
+    --background: transparent;
+    --inner-padding-end: 0px;
+    margin-bottom: 8px;
+  }
+
+  ion-label {
+    font-size: 14px;
+  }
+
+  ion-input, ion-select, ion-textarea {
+    font-size: 15px;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .fondo-personalizado {
+  --background: var(--ion-content-custom) !important;
+}
+
+}

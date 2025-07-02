@@ -1,0 +1,22 @@
+[
+  {
+    "icon": "home-outline",
+    "name": "Inicio",
+    "redirectTo": "/inicio"
+  },
+  {
+    "icon": "car-outline",
+    "name": "Vehículos",
+    "redirectTo": "/vehiculos"
+  },
+  {
+    "icon": "build-outline",
+    "name": "Testing",
+    "redirectTo": "/testing"
+  },
+  {
+    "icon": "file-tray-outline",
+    "name": "Inventario",
+    "redirectTo": "/inventario"
+  }
+]

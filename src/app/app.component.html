@@ -1,0 +1,48 @@
+<ion-app>
+
+  <ion-menu side="start" menuId="first" contentId="main-content">
+    <ion-header>
+     <ion-toolbar style="--padding-top: calc(env(safe-area-inset-top) + 30px); --background: var(--ion-toolbar-background-custom);">
+        <ion-title color="dark"></ion-title>
+
+          <div lines="none" class="logo-center">
+            <img [src]="modoOscuro ? 'https://fxinmobilia.com/SolicitudPagos/Assets/FX_logo_gris.svg' : 'assets/FX2.svg'" style="width: 50px; height: 50px;" />
+          </div>  
+    
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding" style="--background: var(--ion-content-custom)">
+      <ion-list style="background: var(--ion-content-custom) !important;">
+
+        <ion-menu-toggle *ngFor="let c of componentes | async; let i = index">
+          <ion-item *ngIf="i === 0" lines="none" style="--background: var(--ion-content-custom)"
+            routerLink="{{ c.redirectTo }}">
+            <ion-icon name="{{ c.icon }}" slot="start" color="dark"></ion-icon>
+          {{ c.name }}
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <div class="separador"></div>
+
+        <div class="ion-text-center" style="background: var(--ion-content-custom)"> 
+          <ion-text color="medium">
+            <h2 style="margin-top: 10px; margin-bottom: 0px;">General</h2>
+          </ion-text>
+        </div>
+
+        <ion-menu-toggle *ngFor="let c of componentes | async; let i = index">
+          <ion-item *ngIf="i === 1 || i === 2 || i === 3" lines="none"  style="--background: var(--ion-content-custom)"
+            routerLink="{{ c.redirectTo }}">
+            <ion-icon name="{{ c.icon }}" slot="start" color="dark"></ion-icon>
+          {{ c.name }}
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </div>  
+</ion-app>

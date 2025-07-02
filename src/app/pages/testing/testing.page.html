@@ -1,0 +1,103 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding" style="--background: var(--ion-content-custom)">
+
+  <ion-item lines="none" style="--background: var(--ion-content-custom)">
+    <ion-icon slot="start" name="build-outline" style="margin-top:0px"></ion-icon>
+    <ion-text color="dark" slot="start">
+      <h1 class="ion-text-capitalize" style="margin-top:7px">Testing</h1>
+    </ion-text>
+  </ion-item>
+
+  <ion-list>
+  <ion-item *ngFor="let item of datos" style="--background: var(--mi-item-bg);">
+    <ion-label>
+      <h2>Folio: {{ item.folio }}</h2>
+      <p>Vehículo: {{ item.vehiculo }}</p>
+    </ion-label>
+    <ion-button fill="outline" slot="end" (click)="abrirDetalle(item)">
+      Ver Detalle
+    </ion-button>
+  </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item lines="inset" style="--background: var(--mi-item-bg);">
+      <ion-label class="ion-text-wrap">
+        <p style="line-height: 1.6;"><strong>Nombre:</strong> Pepe</p>
+        <p style="line-height: 1.6;"><strong>Correo:</strong> yo.com</p>
+        <p style="line-height: 1.6;"><strong>Rol:</strong> CEO </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" style="--background: var(--mi-item-bg);">
+      <ion-label class="ion-text-wrap">
+        <p style="line-height: 1.6;"><strong>Nombre:</strong> Pepe</p>
+        <p style="line-height: 1.6;"><strong>Correo:</strong> yo.com</p>
+        <p style="line-height: 1.6;"><strong>Rol:</strong> CEO </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="mostrarToast()" expand="block" fill="clear" shape="round">
+    Mostrar Toast
+  </ion-button>
+
+<ion-item style="--background: var(--mi-item-bg);">
+  <ion-label>Estatus</ion-label>
+  <ion-select [(ngModel)]="tabSeleccionado" (ionChange)="obtenerRegistros(tabSeleccionado)" interface="popover" placeholder="Selecciona estatus">
+    <ion-select-option [value]="5">Vehículos</ion-select-option>
+    <ion-select-option [value]="0">Pendientes</ion-select-option>
+    <ion-select-option [value]="1">Aceptados</ion-select-option>
+    <ion-select-option [value]="3">En revisión</ion-select-option>
+    <ion-select-option [value]="4">Entregados</ion-select-option>
+    <ion-select-option [value]="2">Rechazados</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<div [ngSwitch]="tabSeleccionado">
+  <div *ngSwitchCase="5">
+    <ion-item *ngFor="let registro of registros">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdVehiculo }}</strong></h2>
+      <p class="texto-grande" color="dark">
+        <strong>Vehículo:</strong> {{ registro.Vehiculo }}
+      <p class="texto-grande" color="dark">
+        <strong>Estatus:</strong> 
+        <ion-badge [color]="registro.Apartado ? 'warning' : 'success'">{{ registro.Estatus }}</ion-badge>
+      </p>
+      <p *ngIf="registro.Imagen">
+        <img [src]="registro.Imagen" alt="Imagen vehículo" style="max-width: 100px; border-radius: 8px;">
+      </p>
+      <p *ngIf="!registro.Imagen" class="texto-grande" color="dark">Sin imagen</p>
+    </ion-label>
+  </ion-item>
+  </div>
+  <div *ngSwitchCase="0">
+    <!-- Mostrar lista de pendientes -->
+  </div>
+  <div *ngSwitchCase="1">
+    <!-- Mostrar lista de aceptados -->
+  </div>
+  <div *ngSwitchCase="3">
+    <!-- Mostrar lista en revisión -->
+  </div>
+  <div *ngSwitchCase="4">
+    <!-- Mostrar lista entregados -->
+  </div>
+  <div *ngSwitchCase="2">
+    <!-- Mostrar lista rechazados -->
+  </div>
+  <div *ngSwitchDefault>
+    <!-- Mensaje o contenido por defecto -->
+    <p>Selecciona un estatus</p>
+  </div>
+</div>
+
+<ion-footer class="ion-padding font-size-14">
+  <div>
+    <ion-text> Copyright © 2021 Fibrax. All rights reserved. </ion-text>
+  </div>
+</ion-footer>
+  
+</ion-content>

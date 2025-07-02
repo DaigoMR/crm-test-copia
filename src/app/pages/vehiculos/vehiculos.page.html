@@ -1,0 +1,475 @@
+<app-header></app-header>
+
+<ion-content id="main-content" class="ion-padding" style="--background: var(--ion-content-custom)">
+<ion-item lines="none" style="--background: var(--ion-content-custom)">
+  <ion-icon slot="start" name="car-outline" style="margin-top:0px"></ion-icon>
+  <ion-text  style="color: var(--ion-color-custom-text);" slot="start">
+    <h1 class="ion-text-capitalize" style="margin-top:7px">Vehículos</h1>
+  </ion-text>
+</ion-item>
+
+<!-- Botón para abrir el modal -->
+  <ion-button (click)="abrirModal()" class="botones-vertical" fill="outline">Solicitar vehículo</ion-button>
+
+<ion-item lines="none" style="background-color: rgb(154, 162, 185); width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+  <ion-select
+    [(ngModel)]="selectedTab" (ionChange)="obtenerRegistros(selectedTab)" interface="popover" placeholder="Selecciona estatus">
+    <ion-select-option [value]="5">Vehículos</ion-select-option>
+    <ion-select-option [value]="0">Pendientes</ion-select-option>
+    <ion-select-option [value]="1">Aceptados</ion-select-option>
+    <ion-select-option [value]="3">En revisión</ion-select-option>
+    <ion-select-option [value]="4">Entregados</ion-select-option>
+    <ion-select-option [value]="2">Rechazados</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<!-- Spinner de Carga -->
+<ng-container *ngIf="spinners.loadingRegistros; else contenido">
+  <div class="ion-text-center"  style="margin-top: 1rem;">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+</ng-container>
+
+<ng-template #contenido>
+<ng-container [ngSwitch]="selectedTab">
+  <div *ngSwitchCase="5">
+    <ion-item lines="none" *ngFor="let registro of registros"  style="background-color: var(--ion-borde-soli); 
+         --background: var(--mi-list-bg); 
+         width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdVehiculo }}</strong></h2>
+      <p class="texto-grande" style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Vehículo:</strong> {{ registro.Vehiculo }}</p>
+      <p class="texto-grande" style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Estatus:</strong> 
+        <ion-badge [color]="registro.Apartado ? 'warning' : 'success'">{{ registro.Estatus }}</ion-badge>
+      </p>
+      <p *ngIf="registro.Imagen">
+        <img [src]="registro.Imagen" alt="Imagen vehículo" style="max-width: 100px; border-radius: 8px;">
+      </p>
+      <p *ngIf="!registro.Imagen" class="texto-grande" style="color: var(--ion-color-custom-text);"><strong class="negro"> Sin imagen</strong></p>
+    </ion-label>
+  </ion-item>
+  </div> 
+
+  <div *ngSwitchCase="0">
+    <ion-item (click)="abrirModalConRegistro(registro)" *ngFor="let registro of registros" style="--background: var(--mi-list-bg); background-color: rgb(203, 208, 223); width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdSolicitudVehiculo }}</strong></h2>
+      <p class="texto-grande" style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Vehículo:</strong> {{ registro.Vehiculo }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Solicitante:</strong> {{ registro.Usuario }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha solicitud:</strong> {{ registro.FechaSolicitud }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de salida:</strong> {{ registro.FechaSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de salida:</strong> {{ registro.HoraSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de regreso:</strong> {{ registro.HoraRegreso }}</p>
+    </ion-label>
+  </ion-item>
+  </div>
+
+  <div *ngSwitchCase="1">
+    <ion-item (click)="abrirModalConRegistro(registro)" *ngFor="let registro of registros" style="--background: var(--mi-list-bg); background-color: rgb(203, 208, 223); width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdSolicitudVehiculo }}</strong></h2>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Vehículo:</strong> {{ registro.Vehiculo }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Solicitante:</strong> {{ registro.Usuario }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha solicitud:</strong> {{ registro.FechaSolicitud }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de salida:</strong> {{ registro.FechaSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de salida:</strong> {{ registro.HoraSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de regreso:</strong> {{ registro.HoraRegreso }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Entregado por:</strong> {{ registro.UsuarioModificado }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de entrega:</strong> {{ registro.FechaModificacion }}</p>
+    </ion-label>
+  </ion-item>
+  </div>
+
+  <div *ngSwitchCase="3">
+    <ion-item (click)="abrirModalConRegistro(registro)" *ngFor="let registro of registros" style="--background: var(--mi-list-bg); background-color: rgb(203, 208, 223); width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdSolicitudVehiculo }}</strong></h2>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Vehículo:</strong> {{ registro.Vehiculo }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Solicitante:</strong> {{ registro.Usuario }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha solicitud:</strong> {{ registro.FechaSolicitud }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de salida:</strong> {{ registro.FechaSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de salida:</strong> {{ registro.HoraSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de regreso:</strong> {{ registro.HoraRegreso }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Entregado por:</strong> {{ registro.UsuarioRevision }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de entrega:</strong> {{ registro.FechaRevision }}</p>
+    </ion-label>
+  </ion-item>
+  </div>
+
+  <div *ngSwitchCase="4">
+    <ion-item (click)="abrirModalConRegistro(registro)" *ngFor="let registro of registros" style="--background: var(--mi-list-bg); background-color: rgb(203, 208, 223); width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdSolicitudVehiculo }}</strong></h2>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Vehículo:</strong> {{ registro.Vehiculo }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Solicitante:</strong> {{ registro.Usuario }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha solicitud:</strong> {{ registro.FechaSolicitud }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de salida:</strong> {{ registro.FechaSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de salida:</strong> {{ registro.HoraSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de regreso:</strong> {{ registro.HoraRegreso }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Entregado por:</strong> {{ registro.UsuarioRevision }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de entrega:</strong> {{ registro.FechaRevision }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Validado por:</strong> {{ registro.UsuarioEntregado }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de validación:</strong> {{ registro.FechaEntregado }}</p>
+    </ion-label>
+  </ion-item>
+  </div>
+   
+  <div *ngSwitchCase="2">
+    <ion-item (click)="abrirModalConRegistro(registro)" *ngFor="let registro of registros" style="--background: var(--mi-list-bg); background-color: rgb(203, 208, 223); width: 100%; margin: 0 auto; border-radius: 1px; padding: 0.5rem;">
+    <ion-label>
+      <h2 style="font-size: 20px;"><strong>Folio: {{ registro.IdSolicitudVehiculo }}</strong></h2>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Vehículo:</strong> {{ registro.Vehiculo }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Solicitante:</strong> {{ registro.Usuario }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha solicitud:</strong> {{ registro.FechaSolicitud }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de salida:</strong> {{ registro.FechaSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de salida:</strong> {{ registro.HoraSalida }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Hora de regreso:</strong> {{ registro.HoraRegreso }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Entregado por:</strong> {{ registro.UsuarioModificado }}</p>
+      <p class="texto-grande"  style="color: var(--ion-color-custom-text);">
+        <strong class="negro">Fecha de entrega:</strong> {{ registro.FechaModificacion }}</p>
+    </ion-label>
+  </ion-item>
+  </div>
+
+  <div *ngIf="registros.length === 0" class="ion-text-center" style="margin-top: 1rem;">
+    <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+    No se encontraron registros
+  </div>
+</ng-container>
+
+</ng-template>
+
+</ion-content>
+
+ <!-- Solicitud de Vehículo -->
+<!-- Modal pero en Ionic -->
+<ion-modal [isOpen]="mostrarModal" (didDismiss)="cerrarModal()" mode="ios">
+  <ng-template>
+  <ion-header>
+    <ion-toolbar style="--padding-top: calc(env(safe-area-inset-top) + 35px); --background: var(--ion-toolbar-background-custom);">
+
+      <img src="https://fxinmobilia.com/SolicitudPagos/Assets/FX_logo_gris.svg" slot="start" style="width: 40px; height: 40px; margin-right: -12px;" />
+
+      <ion-title>Solicitud de Vehículo</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="cerrarModal()" aria-label="Cerrar modal" color="danger"> Cerrar </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" fullscreen style="--background: var(--ion-content-custom)">
+
+    <form [formGroup]="solicitudForm" (ngSubmit)="solicitarVehiculo()">
+
+    <ion-item *ngIf="vehiculos && vehiculos.length > 0" lines="none" style="--background: var(--ion-content-custom)">
+      <ion-label position="stacked">Vehículo (*)</ion-label>
+        <ion-select 
+          interface="alert"
+          backdropDismiss="false"
+          class="input-centrado con-sangria"
+          formControlName="IdVehiculo" 
+          placeholder="Seleccione un vehículo">
+          <ion-select-option *ngFor="let vehiculo of vehiculos" 
+                      [value]="vehiculo?.IdVehiculo" 
+                      [disabled]="vehiculo?.Apartado == 1">
+                      {{ vehiculo?.Vehiculo }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item> 
+
+      <ion-item lines="none" style="--background: var(--ion-content-custom)">
+        <ion-label position="stacked">Fecha de Salida (*)</ion-label>
+          <ion-input 
+          class="input-centrado con-sangria"
+          display-format="DD/MM/YYYY"
+          presentation="date"
+          prefer-wheel="false"
+          placeholder="DD/MM/YYYY"
+          type="date"
+          formControlName="FechaSalida">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" style="--background: var(--ion-content-custom)">
+        <ion-label position="stacked">Hora de Salida (*)</ion-label>
+        <ion-input
+          class="input-centrado con-sangria"
+          display-format="HH:mm"
+          presentation="time"
+          prefer-wheel="false"
+          placeholder="HH:mm"
+          type="time"
+          formControlName="HoraSalida">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" style="--background: var(--ion-content-custom)">
+        <ion-label position="stacked">Hora de Regreso (*)</ion-label>
+        <ion-input  
+          class="input-centrado con-sangria"
+          display-format="HH:mm"
+          presentation="time"
+          placeholder="HH:mm"
+          type="time"
+          prefer-wheel="false"
+          formControlName="HoraRegreso"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" style="--background: var(--ion-content-custom)">
+        <ion-label position="stacked">Nombre</ion-label>
+          <ion-input
+            class="input-centrado con-sangria input-visible"
+             style="color: var(--ion-color-custom-text);"
+            formControlName="Solicitante"
+            readonly
+          ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" style="--background: var(--ion-content-custom)">
+        <ion-label position="stacked">Motivo de la Solicitud</ion-label>
+        <ion-textarea
+          style="padding: 12px"
+          class="input-centrado"
+          auto-grow="true"
+          placeholder="Escribe el motivo de tu solicitud"
+          maxlength="150"
+          formControlName="Motivo">
+        </ion-textarea>
+
+        <div style="margin-top: 5px">
+        <ion-label class="contador" position="stacked" color="medium">
+          Te quedan {{ caracteresRestantes }} caracteres
+        </ion-label>
+        </div>
+      </ion-item>
+
+      <!-- Solicitud Nueva -->
+      <div style="margin-top: 30px" *ngIf="!solicitudForm.get('IdSolicitudVehiculo')?.value">
+        <ion-button expand="block" type="submit" [disabled]="solicitudForm.invalid || spinners.sendingSolicitud">
+          Enviar
+          <ion-spinner name="dots" *ngIf="spinners.sendingSolicitud" slot="end"></ion-spinner>
+        </ion-button>
+      </div>
+
+    </form>
+
+    <!-- Solicitud Pendiente -->
+    <div *ngIf="
+    solicitudForm.get('IdSolicitudVehiculo')?.value && 
+    solicitudForm.get('IdStatus')?.value == 0 && 
+    permisosAceptar">
+
+    <div *ngIf="permisosEntregar">
+      <ion-button
+      [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+      (click)="modificarDatosSolicitud()"
+      expand="block" style="margin: 0 auto; width: 93%; margin-top: 20px; --background: rgb(109, 108, 108); --color: white;">
+        <ion-icon slot="end" name="create"></ion-icon>
+        Editar solicitud 
+        <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+      </ion-button>
+    </div>
+
+    <ion-grid>
+    <ion-row>
+      <ion-col>
+      <ion-button
+      [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+      (click)="modificarSolicitud(1)"
+      expand="block" style="--background: rgb(57, 161, 57); --color: white;">
+        <ion-icon slot="end" name="checkmark"></ion-icon>
+        Aceptar 
+        <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+      </ion-button>
+      </ion-col>
+
+      <ion-col>
+      <ion-button
+      [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+      (click)="modificarSolicitud(2)"
+      expand="block" style="--background: rgb(202, 42, 42); --color: white;">
+        <ion-icon slot="end" name="close"></ion-icon>
+        Rechazar
+        <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+      </ion-button>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+
+    </div>
+
+    <!-- Solicitud Aceptada -->
+    <div *ngIf="
+    solicitudForm.get('IdSolicitudVehiculo')?.value && 
+    solicitudForm.get('IdStatus')?.value == 1 && 
+    (permisosEntregar || solicitudForm.get('IdUsuario')?.value == usuario.IdUsuario)">
+
+    <ion-item lines="none" class="ion-margin-vertical" style="height: 100%; --background: var(--ion-documentos)">
+    <ion-label position="stacked">
+      Documentos
+      <ion-icon
+        name="information-circle-outline"
+        (click)="mostrarTooltip()"
+        style="cursor: pointer; margin-left: 6px;"
+      ></ion-icon>
+    </ion-label>
+
+    <!-- input file oculto -->
+    <input
+      type="file"
+      style="height: 40px"
+      accept=".jpg,.jpeg,.jpe,.png,.pdf"
+      (change)="onFileChange($event)"/>
+    </ion-item>
+    
+    <ion-button
+      [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+      (click)="modificarDatosSolicitud()"
+      expand="block" style="margin: 0 auto; width: 93%; margin-top: 20px; --background: rgb(109, 108, 108); --color: white;">
+        <ion-icon slot="end" name="create"></ion-icon>
+        Editar solicitud 
+        <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+    </ion-button>
+    
+    <ion-grid style="margin-top: 6px">
+    <ion-row>
+    <ion-col>
+    <ion-button
+      [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+      (click)="subirDocumentos()"
+      expand="block" style=" margin: 0 auto; width: 100%; --background: rgb(57, 161, 57);">
+        <ion-icon slot="end" name="checkbox"></ion-icon>
+        Marcar como entregado
+        <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+    </ion-button>
+    </ion-col>
+
+    <ion-col>
+    <ion-button
+      [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+      (click)="modificarSolicitud(0)"
+      expand="block" style=" margin: 0 auto; width: 100%; --background: rgb(216, 150, 7); --color: black">
+        <ion-icon slot="end" name="time"></ion-icon>
+        Devolver a pendiente
+        <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+    </ion-button>
+    </ion-col>
+    </ion-row>
+    </ion-grid> 
+    </div>
+
+    <!-- Solicitud Rechazada -->
+    <div *ngIf="
+      solicitudForm.get('IdSolicitudVehiculo')?.value && 
+      solicitudForm.get('IdStatus')?.value == 2 && 
+      permisosEntregar">
+
+      <ion-button
+        [disabled]="solicitudForm.invalid || spinners.sendingSolicitud"
+        (click)="modificarSolicitud(0)"
+        expand="block" style="margin: 25px auto 0 auto; width: 93%; --background: rgb(216, 150, 7); --color: black">
+          <ion-icon slot="end" name="time"></ion-icon>
+          Devolver a pendiente
+          <div role="status"
+        *ngIf="spinners.sendingSolicitud"></div>
+      </ion-button>
+    </div>
+
+    <!-- Solicitud en Revisión o Entregada -->
+    <div *ngIf="
+      solicitudForm.get('IdSolicitudVehiculo')?.value && 
+      [3, 4].includes(solicitudForm.get('IdStatus')?.value)">
+
+      <ion-label style="margin-left: 12px; margin-top: 20px; margin-bottom: 10px; display: block;">Documentos cargados</ion-label>
+
+      <div *ngIf="spinners.loadingArchivos" style="margin-top: 15px; display: flex; justify-content: center; align-items: center;">
+        <ion-spinner name="circles" role="status"></ion-spinner>
+      </div>
+
+      <p *ngIf="!spinners.loadingArchivos && archivos.length == 0" class="ion-text-center">
+        <ion-icon slot="start" name="information-circle"></ion-icon>
+        No se encontraron documentos
+      </p>
+
+      <div *ngFor="let archivo of archivos">
+        <ion-item lines="none" style="--background: rgb(226, 226, 226); margin-left: 12px">
+          <ion-label>
+            <a [href]="'https://fxinmobilia.com/api/storage/documentos_solicitudes_vehiculos/' + archivo.Archivo"
+            target="_blank" style="text-decoration: underline; color: var(--ion-color-primary);">
+            {{ archivo.Nombre }}
+            </a>
+          </ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+    <!-- Solicitudes en Revisión -->
+    <div *ngIf="
+      [3].includes(solicitudForm.get('IdStatus')?.value) &&
+      permisosEntregar">
+
+      <ion-button style="margin: 20px auto 0 auto"
+        [disabled]="spinners.sendingSolicitud" (click)="modificarSolicitud(4)">
+        Marcar como entregado
+        <div role="status" *ngIf="spinners.sendingSolicitud"></div>
+      </ion-button>
+ 
+      <ion-button style="margin: 20px auto 0 auto"
+        [disabled]="spinners.sendingSolicitud" (click)="modificarSolicitud(5)">
+        Solicitar resubir documentos
+        <div role="status" *ngIf="spinners.sendingSolicitud"></div>
+      </ion-button>
+    </div>
+
+  </ion-content>
+  
+  </ng-template>
+
+</ion-modal>
