@@ -1,0 +1,7 @@
+{
+  "name": "crm-test",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
